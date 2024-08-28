@@ -71,7 +71,7 @@ const app = Vue.createApp({
   methods: {
     async login() {
       try {
-        const response = await axios.post('/api/auth/login', this.loginForm);
+        const response = await axios.post('https://rune-ecommerce.onrender.com/api/auth/login', this.loginForm);
         this.isLoggedIn = true;
         this.loginError = '';
         this.fetchProducts();
@@ -86,7 +86,7 @@ const app = Vue.createApp({
     },
     async fetchProducts() {
       try {
-        const response = await axios.get(`/api/products?page=${this.currentPage}&limit=${this.itemsPerPage}`);
+        const response = await axios.get(`https://rune-ecommerce.onrender.com/api/products?page=${this.currentPage}&limit=${this.itemsPerPage}`);
         this.products = response.data.products;
         this.currentPage = response.data.currentPage;
         this.totalProducts = response.data.totalProducts; // Update this line
@@ -121,7 +121,7 @@ const app = Vue.createApp({
         });
     
         if (this.editingProduct) {
-          await axios.put(`/api/products/${this.editingProduct._id}`, productData);
+          await axios.put(`https://rune-ecommerce.onrender.com/api/products/${this.editingProduct._id}`, productData);
           this.successMessage = 'Product updated successfully.';
         } else {
           await axios.post('/api/products', productData);
@@ -149,7 +149,7 @@ const app = Vue.createApp({
       console.log('Deleting product with ID:', productId); // Add this line for debugging
       if (confirm('Are you sure you want to delete this product?')) {
         try {
-          await axios.delete(`/api/products/${productId}`);
+          await axios.delete(`https://rune-ecommerce.onrender.com/api/products/${productId}`);
           this.fetchProducts();
           this.successMessage = 'Product deleted successfully.';
         } catch (error) {
