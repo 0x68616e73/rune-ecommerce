@@ -35,15 +35,12 @@ const app = Vue.createApp({
         filtered = filtered.filter(product => product.category === this.selectedCategory);
       }
 
-      if (this.minPrice !== null) {
-        filtered = filtered.filter(product => product.price >= this.minPrice);
+      if (this.minPrice !== null && this.minPrice !== '') {
+        filtered = filtered.filter(product => product.price >= parseFloat(this.minPrice));
       }
-
-      if (this.maxPrice !== null) {
-        console.log(this.maxPrice)
-        filtered = filtered.filter(product => product.price <= this.maxPrice);
-      } else if (this.maxPrice !== null){
-        console.log(this.maxPrice + 'sa')
+      
+      if (this.maxPrice !== null && this.maxPrice !== '') {
+        filtered = filtered.filter(product => product.price <= parseFloat(this.maxPrice));
       }
 
       const sortMultiplier = this.sortOrder === 'asc' ? 1 : -1;
