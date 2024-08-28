@@ -66,7 +66,7 @@ const app = Vue.createApp({
     async fetchProducts() {
       this.isLoading = true;
       try {
-        const response = await axios.get(`https://rune-ecommerce.onrender.com/api/products?page=${this.currentPage}&limit=${this.itemsPerPage}`);
+        const response = await axios.get(`https://inventory-management-rkxi.onrender.com/api/products?page=${this.currentPage}&limit=${this.itemsPerPage}`);
         this.products = response.data.products;
         this.totalProducts = response.data.totalProducts;
         this.currentPage = response.data.currentPage;
@@ -79,7 +79,7 @@ const app = Vue.createApp({
     async selectProduct(product) {
       this.isLoading = true;
       try {
-        const response = await axios.get(`https://rune-ecommerce.onrender.com/api/products/${product._id}`);
+        const response = await axios.get(`https://inventory-management-rkxi.onrender.com/api/products/${product._id}`);
         this.selectedProduct = response.data;
         this.selectedProduct.dateAdded = moment(this.selectedProduct.dateAdded).format('YYYY.MM.DD');
         this.$nextTick(() => {
