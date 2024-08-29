@@ -12,8 +12,20 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT;
 
+const allowedOrigins = [
+  'https://runeshop.netlify.app',
+  'https://runeshop.netlify.app/',
+  'https://rune-ecommerce.onrender.com'
+];
+
 app.use(cors({
-  origin: 'https://runeshop.netlify.app/',
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   credentials: true
 }));
